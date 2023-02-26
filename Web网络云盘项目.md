@@ -37,12 +37,12 @@ int pthread_cond_init(pthread_cond_t*cond,cosnt pthread_condattr*cond_attr);//�
 int pthread_cond_destory(pthread_cond_t*cond);//销毁
 int pthread_cond_broadcast(pthread_cond_t*cond);//通知所有等待的线程。
 int pthread_cond_signal(pthread_cond_t*cond);//唤醒一个等待的线程。
-int pthread_cond_waitj(pthread_cond_t*cond,pthread_mutex_t*mutex);//使线程等待，为了保证原子性，需要传入一个已加锁的互斥量。
+int pthread_cond_wait(pthread_cond_t*cond,pthread_mutex_t*mutex);//使线程等待，为了保证原子性，需要传入一个已加锁的互斥量。
 ```
 
 ## 4.I/O模型
 
-阻塞IO，非阻塞IO，信号驱动IO，IO多路复用，异步IO。其中前四种为同步IO，与异步IO的区别是异步IO是由操作系统将数据拷贝到用户区并通知程序。
+阻塞IO，非阻塞IO，信号驱动IO，IO多路复用，异步IO。其中前四种为同步IO，与同步IO的区别是异步IO是由操作系统将数据拷贝到用户区并通知程序。
 
 ## 5.事件处理模式
 
@@ -169,7 +169,7 @@ MYSQL_ROW mysql_fetch_row(MYSQL_RES* result);//获取对应的数组。
 
 ## 24.说说你认为这个项目的缺点
 
-从功能性上讲，没有实现文件上传这个核心功能，从代码角度来讲，没有实现cookie等维持用户持久登录的方式，当http连接断开用户就需要重新登录。http类没有过于臃肿，各种功能都堆积到一个类。有些消息传递使用赋值传递，效率过低。还有就是没有对长时间没有传消息的连接进行断开连接的操作(考虑为epoll添加一个最大监视数量，这样就可以使用LRU这种结构）。还有就是项目没有一个日志系统。在现在我看来，这个项目还是有很多优化空间的。
+从功能性上讲，没有实现文件上传这个核心功能，从代码角度来讲，没有实现cookie等维持用户持久登录的方式，当http连接断开用户就需要重新登录。http类过于臃肿，各种功能都堆积到一个类。有些消息传递使用赋值传递，效率过低。还有就是没有对长时间没有传消息的连接进行断开连接的操作(考虑为epoll添加一个最大监视数量，这样就可以使用LRU这种结构）。还有就是项目没有一个日志系统。在现在我看来，这个项目还是有很多优化空间的。
 
 ## 25.说说这个项目的收获(优点)
 
